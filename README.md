@@ -54,4 +54,30 @@ docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix \
 One of most common uses is to overlay some results onto an MNI template. We will therefore copy some MNI images inside the image during build.
 
 
+## Glitch with stroom
+I experienced a problem replicating this behaviour by connecting to our stroom server.
+
+Finally the issue was resolved with the following setting:
+- connecting to stroom using twingate
+- launching x2goclient
+- issueing the following docker run. Note the mapping of the `XAUTHORITY` environmental variable
+
+
+```bash
+docker run --rm \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --net=host \
+    -e DISPLAY=unix$DISPLAY \
+    -v $(pwd):/home/user \
+    -e XAUTHORITY=/home/user/.Xauthority \
+    -v $HOME/.Xauthority:/home/user/.Xauthority \
+    -t fslview:5.0 fslview /home/user/MNI152_T1_2mm_brain.nii.gz
+```
+
+by the way, this works also when connecting to stroom using `ssh -X`, however in this case the transfer times for rendering the X app and loading the images become geological, so it's not really practical.
+
+
+
+
+
 
