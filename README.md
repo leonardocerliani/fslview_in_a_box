@@ -1,11 +1,11 @@
 # fslview in a box
 
 ## Aim
-I run fsl 6.0.8 in a remote Ubuntu 22.04 server. To view the images, I would use fsleyes. However there are problems either with OpenGL or wxpython.
+I run fsl 6.0.8 in a remote Ubuntu 22.04 server. To view the images, I would use fsleyes. However there are problems either with OpenGL or wxpython, especially in certain Linux distros and over SSH. These problems are repeatedly mentioned in the fsl jiscmail list, and also mentioned in the [fsleyes installation page](https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/userdoc/install.html).
 
 All I need it a lightweight image viewer like the previous `fslview`. However it has been removed from recent distributions.
 
-The solution is to run it in a Docker
+The solution is to run it in a Docker.
 
 
 ## Pulling an FSL 5.0 docker image
@@ -15,7 +15,11 @@ The Dockerfile in this repo is from [this great tutorial](https://github.com/giu
 docker build --tag fslview:5.0 .
 ```
 
-The image contains fslview. It is necessary to map the local `/tmp/.X11-unix` directory and the local `PWD` so that we can access the images in the local folder. Also the `$DISPLAY` env var must be mapped.
+To have fslview run in the host, it is necessary to map the local `/tmp/.X11-unix` directory and the local `PWD` so that we can access the images in the local folder. Also the `$DISPLAY` env var must be mapped. 
+
+Finally, I observed that in some cases setting only these two parameters leads to refused connection with the local X server. Therefore - after many hours of search, trials and especially errors - I found out that it is necessary also to map the local `Xauthority` env_var/directory and put host and container in the same network with `--net=host`. 
+
+(if you want to know the function of each parameter, just ask ChatGPT - it does a pretty good job)
 
 To test it, run:
 
