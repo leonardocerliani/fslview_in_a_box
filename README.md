@@ -3,7 +3,7 @@
 ## Aim
 I run fsl 6.0.8 in a remote Ubuntu 22.04 server. To view the images, I would use fsleyes. However there are problems either with OpenGL or wxpython, especially in certain Linux distros and over SSH. These problems are repeatedly mentioned in the fsl jiscmail list, and also mentioned in the [fsleyes installation page](https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/userdoc/install.html).
 
-All I need it a lightweight image viewer like the previous `fslview`. However it has been removed from recent distributions.
+All I need is a lightweight image viewer like the previous `fslview`. However it has been removed from recent distributions.
 
 The solution is to run it in a Docker.
 
