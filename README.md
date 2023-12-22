@@ -5,7 +5,7 @@ I run fsl 6.0.8 in a remote Ubuntu 22.04 server. To view the images, I would use
 
 All I need is a lightweight image viewer like the previous `fslview`. However it has been removed from recent distributions.
 
-The solution is to run it in a Docker.
+The solution is to run it in a Docker. The following assumes that you already have Docker up and running (and you are in the docker group) on the machine where you want to run this code. 
 
 
 ## Pulling an FSL 5.0 docker image
