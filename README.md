@@ -67,8 +67,28 @@ By the way, this works also when connecting via `ssh -X`, however in this case t
 
 
 
-## To Do
-One of most common uses is to overlay some results onto an MNI template. We will therefore copy some MNI images inside the image during build.
+## Atlases and templates
+This image has not standard templates or atlases - which is what you usually want when inspecting an image. 
+
+You got two choices for this:
+
+**1. Copy a directory with your (MNI) templates during build phase**: to do that, just modify the Dockerfile, e.g. by adding the following line at the end:
+
+```bash
+COPY path/to/my/templates /usr/share/fsl/5.0/data/standard
+```
+
+I cannot provide the templates here, but you can get them from your own [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) installation.
+
+**2. Map the location of the template(s) in your `docker run`**, e.g. modify the `fslview.sh` script by adding the line:
+
+```bash
+-v path/to/my/templates:/usr/share/fsl/5.0/data/standard
+```
+
+Note that the loading time of your main image - the one passed as an argument to fslview.sh - will increase (similarly for both solutions) proportionally to the amount of images you have in the templates directory.
+
+Of course you can also decide to have two scripts, e.g. `fslview_templates.sh` and `fslview.sh` when you do or don't want to load additional templates.
 
 
 
