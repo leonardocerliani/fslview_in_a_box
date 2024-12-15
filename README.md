@@ -53,6 +53,8 @@ We call this script `fslview.sh` and we will place it in a place within the path
 
 image=$1
 
+# xhost +local:docker
+
 docker run --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --net=host \
@@ -61,6 +63,9 @@ docker run --rm \
     -e XAUTHORITY=/home/user/.Xauthority \
     -v $HOME/.Xauthority:/home/user/.Xauthority \
     -t fslview:5.0 fslview /home/user/${image}
+
+# xhost -local:docker
+
 ```
 
 By the way, this works also when connecting via `ssh -X`, however in this case the transfer times for rendering the X app and loading the images become geological, so it's not really practical.
