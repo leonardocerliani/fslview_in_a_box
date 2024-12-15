@@ -4,6 +4,8 @@
 
 image=$1
 
+# xhost +local:docker
+
 docker run --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --net=host \
@@ -12,5 +14,7 @@ docker run --rm \
     -e XAUTHORITY=/home/user/.Xauthority \
     -v $HOME/.Xauthority:/home/user/.Xauthority \
     -t fslview:5.0 fslview /home/user/${image}
+
+# xhost -local:docker
 
 # EOF
