@@ -53,8 +53,6 @@ We call this script `fslview.sh` and we will place it in a place within the path
 
 image=$1
 
-# xhost +local:docker
-
 docker run --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --net=host \
@@ -63,17 +61,16 @@ docker run --rm \
     -e XAUTHORITY=/home/user/.Xauthority \
     -v $HOME/.Xauthority:/home/user/.Xauthority \
     -t fslview:5.0 fslview /home/user/${image}
-
-# xhost -local:docker
-
 ```
 
 By the way, this works also when connecting via `ssh -X`, however in this case the transfer times for rendering the X app and loading the images become geological, so it's not really practical.
 
-
+## Linux and Mac OS 
+There are two scripts, one for Mac OS (tested on Sequoia), the other for Linux (tested on Ubuntu 20.04 LTS).
 
 ## Atlases and templates
 This image has not standard templates or atlases - which is what you usually want when inspecting an image. 
+You can e.g. copy the appropriate script to your `/usr/bin`, e.g. as `fslview`. Make sure you have/add executing priviledges (e.g. `chmod +x /usr/local/bin/fslview`)
 
 You got two choices for this:
 

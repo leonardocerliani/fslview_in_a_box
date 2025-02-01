@@ -4,7 +4,7 @@
 
 FROM ubuntu:xenial
 #FROM centos:7
-MAINTAINER Giulia Berto <giulia.berto.4@gmail.com>
+#MAINTAINER Giulia Berto <giulia.berto.4@gmail.com>
 
 RUN apt-get update && apt-get install -y wget jq vim
 
@@ -26,4 +26,3 @@ ENV FSLREMOTECALL=
 ENV FSLTCLSH=/usr/bin/tclsh
 ENV FSLWISH=/usr/bin/wish
 ENV POSSUMDIR=/usr/share/fsl/5.0
-
