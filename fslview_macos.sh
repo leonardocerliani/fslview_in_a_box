@@ -17,6 +17,13 @@ docker run --rm \
     -v $(pwd):/home/user \
     -t fslview:5.0 fslview /home/user/${image}
 
+    # # If you have a directory with standard images, you can specify it here
+    # # and place this line above as an additional -v argument
+    # -v /path/to/standard:/usr/share/fsl/5.0/data/standard \
+
+
+    # # Differences with the fslview_linux.sh script
+    # #
     # # XQuartz does not use UNIX domain sockets for X11 communication like it does on Linux. 
     # # Instead, it relies on TCP/IP networking
     # -v /tmp/.X11-unix:/tmp/.X11-unix \
